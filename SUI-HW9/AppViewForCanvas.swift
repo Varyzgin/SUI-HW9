@@ -7,15 +7,16 @@
 
 import SwiftUI
 
-struct AppViewForCanvas: View {    
+struct AppViewForCanvas: View {
+    @State var navBarBottom: CGFloat = 0
     var body: some View {
         ZStack(alignment: .top) {
-            NavBarView()
+            NavBarView(navBarBottom: $navBarBottom)
                 .zIndex(1)
 
             ZStack(alignment: .bottom) {
                 
-                MainPageView()
+                MainPageView(navBarBottom: $navBarBottom)
                 
                 TabBarView()
                     .frame(alignment: .bottom)

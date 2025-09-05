@@ -10,9 +10,22 @@
 		32B715F42E572A2B00400FCC /* SUI-HW9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SUI-HW9.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3209762A2E69DFD600AA16A4 /* Exceptions for "SUI-HW9" folder in "SUI-HW9" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 32B715F32E572A2B00400FCC /* SUI-HW9 */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		32B715F62E572A2B00400FCC /* SUI-HW9 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3209762A2E69DFD600AA16A4 /* Exceptions for "SUI-HW9" folder in "SUI-HW9" target */,
+			);
 			path = "SUI-HW9";
 			sourceTree = "<group>";
 		};

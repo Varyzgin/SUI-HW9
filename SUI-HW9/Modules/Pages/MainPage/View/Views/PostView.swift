@@ -22,7 +22,7 @@ struct PostView: View {
                         .overlay {
                             Image(.like)
                                 .resizable()
-                                .scaledToFit()
+                                .scaledToFill()
                                 .frame(width: 16 * scaleModifier, height: 16 * scaleModifier)
                         }
                 }

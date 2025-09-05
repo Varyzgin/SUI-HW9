@@ -7,18 +7,7 @@
 
 import SwiftUI
 
-enum Categories: String, CaseIterable {
-    case Все, Outdoor, Tennis, Другие, Nike, Adidas
-}
-
-struct MainPageView: View {
-    @Environment(\.sizeCategory) var sizeCategory
-    @Binding var navBarBottom: CGFloat
-    @State var headerTop: CGFloat = 0
-    @State var headerBottom: CGFloat = 0
-    @State var categoriesScrollViewTop: CGFloat = 0
-    @State var searchingText: String = ""
-    @FocusState var focusOnSearchBar: Bool
+struct Beta2PageView: View {
     @State var selectedCategory: Categories?
     @State var deltaScroll: CGFloat = 0
     
@@ -27,16 +16,6 @@ struct MainPageView: View {
         
         ZStack(alignment: .top){
             VStack(alignment: .leading, spacing: 0) {
-                GeometryReader { geo in
-                    Color.clear
-                        .onChange(of: geo.frame(in: .global).maxY) { _, new in
-                            headerTop = new
-                        }
-                        .onAppear {
-                            headerTop = geo.frame(in: .global).maxY
-                        }
-                }
-                .frame(height: 0)
                 SearchAndFiltersView()
                     .padding(.horizontal, Margins.M)
                 
@@ -47,17 +26,6 @@ struct MainPageView: View {
                     .padding(.horizontal, Margins.M)
                     .padding(.top, 24)
                     .padding(.bottom, 14)
-                
-                GeometryReader { geo in
-                    Color.clear
-                        .onChange(of: geo.frame(in: .global).maxY) { _, new in
-                            categoriesScrollViewTop = new
-                        }
-                        .onAppear {
-                            categoriesScrollViewTop = geo.frame(in: .global).maxY
-                        }
-                }
-                .frame(height: 0)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
@@ -81,33 +49,31 @@ struct MainPageView: View {
                     .padding(.horizontal, Margins.M)
                 }
                 .padding(.bottom, 14)
-
-                GeometryReader { geo in
-                    Color.clear
-                        .onChange(of: geo.frame(in: .global).maxY) { _, new in
-                            headerBottom = new
-                        }
-                        .onAppear {
-                            headerBottom = geo.frame(in: .global).maxY
-                        }
-                }
-                .frame(height: 0)
+                //                GeometryReader { geo in
+                //                    Color.red.onChange(of: geo.frame(in: .global).minY) {
+                //                        print(geo.frame(in: .global).minY)
+                //                    }
+                //                }
+                //                .frame(height: 1)
             }
             .background(Color.background)
-            .padding(.top, deltaScroll + navBarBottom)
+            .padding(.top, deltaScroll + 117 * scaleModifier)
             .zIndex(1)
             
             ScrollView {
                 ScrollViewReader { proxy in
                     VStack {
                         GeometryReader { geo in
-                            Color.clear
+                            Color.green
                                 .onChange(of: geo.frame(in: .global).minY) { oldValue, newValue in
-                                    let hidingAreaHeight = headerTop - categoriesScrollViewTop
-                                    deltaScroll = newValue > hidingAreaHeight ? newValue : hidingAreaHeight
+                                    print(newValue)
+                                    deltaScroll = newValue > -105 * scaleModifier ? newValue : -105 * scaleModifier
+                                }
+                                .onAppear{
+                                    print(geo.frame(in: .global).minY)
                                 }
                         }
-                        .frame(height: headerBottom - headerTop + navBarBottom)
+                        .frame(height: 269)
                         
                         ForEach(Categories.allCases, id: \.self) { item in
                             VStack(alignment: .leading) {

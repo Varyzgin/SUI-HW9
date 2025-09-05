@@ -10,6 +10,7 @@ import SwiftUI
 
 struct NavBarView: View {
     @Environment(\.sizeCategory) var sizeCategory // для нормального обновления scaleModifier
+    @Binding var navBarBottom: CGFloat
     
     var body: some View {
         // { x^2 + y^2 = (44/2)^2 - окружность }
@@ -17,8 +18,8 @@ struct NavBarView: View {
         // x = sqrt(44^2 / 2^3)
         let scaleModifier: CGFloat = UIFontMetrics(forTextStyle: .body).scaledValue(for: 16) / 16
         let bagMarkPosition: CGFloat = sqrt(pow(44 * scaleModifier, 2) / pow(2,3))
-
-        VStack {
+        
+        VStack(spacing: 0) {
             ZStack {
                 Text("Главная")
                     .lineLimit(1)
@@ -59,9 +60,19 @@ struct NavBarView: View {
                     }
                 }
             }
+            .padding(.horizontal, Margins.M / scaleModifier)
+            .padding(.bottom, Margins.S / scaleModifier)
+            .background(Color.background)
+            GeometryReader { geo in
+                Color.clear
+                    .onChange(of: geo.frame(in: .global).maxY) { _, new in
+                        navBarBottom = new
+                    }
+                    .onAppear {
+                        navBarBottom = geo.frame(in: .global).maxY
+                    }
+            }
+            .frame(height: 0)
         }
-        .padding(.horizontal, Margins.M / scaleModifier)
-        .padding(.bottom, Margins.S / scaleModifier)
-        .background(Color.background)
     }
 }
